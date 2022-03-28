@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://kit.fontawesome.com/015d178d74.js" crossorigin="anonymous"></script>
+    <title>eCommerce</title>
+</head>
+<body>
+    <header>
+        <div class="header__info">
+            <ul>
+                <li><i class="fa-solid fa-phone"></i> 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="header__logo">
+            <div id="logo"></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="cart.html">Mon panier</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="main__cart">
+            <h1 class="main__cart__title">Vos petits chouchous :</h1>
+            <div class="main__cart__content"></div>
+            <form action="#" class="main__cart__form">
+                <label for="name">Votre nom</label>
+                <input type="text" name="name" id="name">
+                <label for="email">Votre adresse email</label>
+                <input type="text" name="email" id="email">
+                <label for="message">Votre message</label>
+                <textarea name="message" id="message"></textarea>
+                <a href="index.html"><input type="button" value="Commander mon chat !" class="main__cart__form__submit"></a>
+                
+            </form>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer__info">
+            <div id="logo"></div>
+            <ul>
+                <li>Pour nous joindre : 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="footer__credits">
+            <p>All rights reserved © 2022 - Toute reproduction interdite.</p>
+        </div>
+    </footer>
+    <script src="./assets/js/app.js"></script>
+</body>
+</html>
