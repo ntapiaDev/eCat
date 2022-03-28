@@ -44,10 +44,6 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
 
     function addCat() {
-        let choosenCats = []
-        if (localStorage.getItem("Chat choisi") !== null) {
-            choosenCats.push(localStorage.getItem("Chat choisi"))
-        }      
 
         class choosenCat {
             constructor(id, quantity) {
@@ -57,41 +53,47 @@ if (document.querySelector(".main__cat-info")) {
         }
 
         let quantity = document.querySelector(".main__cat-info__number").value
-        // let cat = new choosenCat(id, quantity)
         let cat = JSON.stringify(new choosenCat(id, quantity))
-        choosenCats.push(cat)
-        localStorage.setItem("Chat choisi", choosenCats);
+        localStorage.setItem(id, cat);
     }
 }
 
 // Panier
 
-if (localStorage.getItem("Chat choisi") !== null) {
-    let storage = JSON.parse(localStorage.getItem("Chat choisi"))
-    console.log(storage);
+if (localStorage.length > 0) {
+    let j = 0
+    for (let i = 0; i < 9; i++) {
+        if (localStorage.getItem(i + 1) !== null) {
+            let storage = JSON.parse(localStorage.getItem(i + 1))
+            console.log(storage);
 
-
-    for (let i = 0; i < storage.length; i++) {
-        if (document.querySelector(".main__cart__content")) {
-            let catInCart = document.createElement("div")
-            catInCart.classList.add("main__cart__cat")
-            document.querySelector(".main__cart__content").appendChild(catInCart)
-    
-            let catinCartImg = document.createElement("img")
-            catinCartImg.classList.add("main__cart__cat__img")    
-            document.querySelectorAll(".main__cart__cat")[i].appendChild(catinCartImg)
-            catinCartImg.src = `./assets/img/${storage.id[i]}.png`
-            console.log(catinCartImg.src);
-            
-            let catinCartName = document.createElement("p")
-            catinCartName.textContent = cats[storage[i] - 1].name
-            document.querySelectorAll(".main__cart__cat")[i].appendChild(catinCartName)
-    
-            document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
-    
-            function getMyCat() {
-                localStorage.clear()
+            if (document.querySelector(".main__cart__content")) {
+                let catInCart = document.createElement("div")
+                catInCart.classList.add("main__cart__cat")
+                document.querySelector(".main__cart__content").appendChild(catInCart)
+        
+                let catinCartImg = document.createElement("img")
+                catinCartImg.classList.add("main__cart__cat__img")    
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartImg)
+                catinCartImg.src = `./assets/img/${storage.id}.png`
+                console.log(catinCartImg.src);
+                
+                let catinCartName = document.createElement("p")
+                catinCartName.textContent = cats[storage.id - 1].name
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartName)
+                j++
+        
+                document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
+        
+                function getMyCat() {
+                    localStorage.clear()
+                }
             }
         }
     }
+
+    //JSON.parse("{\"id\":\"3\",\"quantity\":\"2\"}")
+
+    // marche avec un mais pas avec deux
+    // [,] liste à faire
 }
