@@ -192,6 +192,16 @@ body {
         }
     }
 
+    &__form {
+        width: 400px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        label {
+            margin: 10px;
+        }
+    }
+
     &__number {
         width: 150px;
         padding: 5px;
@@ -202,10 +212,23 @@ body {
         padding: 5px;
         border-radius: 2px;
 
-        &:hover {
+        &.enable:hover {
             cursor: pointer;
             background-color: red;
             color: #FFF;
+        }
+    }
+
+    &__ready {
+        margin-top: 25px;
+        margin-left: 25px;
+        font-style: italic;
+        font-weight: bold;
+        text-shadow: $shadow;
+        color: #ff3333;
+
+        &.ready {
+            color: #4BB543;
         }
     }
 }

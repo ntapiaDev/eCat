@@ -1,21 +1,22 @@
 class Cat {
-    constructor(name, race, color, age) {
+    constructor(name, race, color, age, statut) {
         this.name = name
         this.race = race
         this.color = color
         this.age = age
+        this.statut = statut
     }
 }
 
-let gribouille = new Cat("Gribouille", "Main coon", "gris", "8 ans")
-let simba = new Cat("Simba", "Sphynx", "roux", "6 mois")
-let nala = new Cat("Nala", "Bengal", "blanc", "1 an et demi")
-let tigrou = new Cat("Tigrou", "bengal", "tigré")
-let maya = new Cat("Maya", "Ragdoll", "gris")
-let chipie = new Cat("Chipie", "Savannah", "blanc")
-let filou = new Cat("Filou", "Bleu russe", "gris")
-let caramel = new Cat("Caramel", "Main coon", "roux")
-let merlin = new Cat("Merlin", "Angora", "noir et blanc")
+let gribouille = new Cat("Gribouille", "Main coon", "gris", "8 ans", true)
+let simba = new Cat("Simba", "Sphynx", "roux", "1 an et demi", true)
+let nala = new Cat("Nala", "Bengal", "blanc", "6 mois", false)
+let tigrou = new Cat("Tigrou", "bengal", "tigré", "1 ans", true)
+let maya = new Cat("Maya", "Ragdoll", "gris", "1 ans", true)
+let chipie = new Cat("Chipie", "Savannah", "blanc", "1 ans", false)
+let filou = new Cat("Filou", "Bleu russe", "gris", "1 ans", true)
+let caramel = new Cat("Caramel", "Main coon", "roux", "1 ans", true)
+let merlin = new Cat("Merlin", "Angora", "noir et blanc", "1 ans", true)
 
 let cats = []
 cats.push(gribouille, simba, nala, tigrou, maya, chipie, filou, caramel, merlin)
@@ -39,22 +40,43 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".age").textContent = cats[id - 1].age
     document.querySelector(".race").textContent = cats[id - 1].race
     document.querySelector(".main__cat-info__btn").value = `Ajouter ${cats[id - 1].name} au panier`
+    let readyInfo = document.querySelector(".main__cat-info__ready")
+    if (cats[id - 1].statut) {
+        readyInfo.innerHTML = "Votre chat est prêt à être adopté"
+        readyInfo.classList.add("ready")
+        document.querySelector(".main__cat-info__btn").classList.add("enable")
+    } else {
+        readyInfo.innerHTML = "Nous avons encore besoin de nous occuper de ce chat avant qu'il ne puisse être adopté"
+        document.querySelector(".main__cat-info__btn").disabled = true
+    }
+    
 
     // Ajout au panier
     document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
-
+    document.querySelector(".main__cat-info__number").value = 1
     function addCat() {
-
-        class choosenCat {
-            constructor(id, quantity) {
-                this.id = id
-                this.quantity = quantity
+        
+        if (document.querySelector(".main__cat-info__number").value > 0) {
+            class choosenCat {
+                constructor(id, statut, vaccin, puces, quantity) {
+                    this.id = id
+                    this.statut = statut
+                    this.vaccin = vaccin
+                    this.puces = puces
+                    this.quantity = quantity
+                }
             }
-        }
 
-        let quantity = document.querySelector(".main__cat-info__number").value
-        let cat = JSON.stringify(new choosenCat(id, quantity))
-        localStorage.setItem(id, cat);
+            let statut = cats[id - 1].statut
+            let vaccin = document.querySelector("#vaccin").checked
+            let puces = document.querySelector("#puces").checked
+            let quantity = document.querySelector(".main__cat-info__number").value
+            let cat = JSON.stringify(new choosenCat(id, statut, vaccin, puces, quantity))
+            localStorage.setItem(id, cat);
+        } else {
+            alert("Vous n'avez pas sélectionné de quantité")
+            document.querySelector(".main__cat-info__btn").parentNode.href = "#"
+        }
     }
 }
 
