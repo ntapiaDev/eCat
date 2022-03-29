@@ -41,11 +41,26 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @media screen and (max-width: 768px) {
+            display: block;
+        } 
+
+        &__container {
+            display: flex;
+            align-items: center; 
+        }
+        &__name {
+            font-size: 2em;
+            @media screen and (max-width: 1280px) {
+                font-size: 1.5em;
+            }
+        }
 
         ul {
             display: flex;
             list-style: none;
             li {
+                margin: auto;
                 padding: 25px;
                 a {
                     text-decoration: none;
@@ -154,6 +169,9 @@ body {
             li {
                 padding: 25px;
                 list-style: none;
+                @media screen and (max-width: 768px) {
+                    padding: 10px;
+                } 
             }
         }
     }
@@ -185,6 +203,16 @@ body {
     &__img {
         width: 500px;
         margin-bottom: 15px;
+        @media screen and (max-width: 1280px) {
+            width: 85%;
+        }
+        @media screen and (max-width: 768px) {
+            width: 95%;
+        }
+    }
+
+    &__info {
+        margin-left: 20px;
     }
 
     p {
@@ -192,8 +220,7 @@ body {
         width: 720px;
         @media screen and (max-width: 768px) {
             width: auto;
-            margin-top: 25px;
-            padding: 10px;
+            margin-top: 10px;
         }
         span {
             color: red;
@@ -252,6 +279,10 @@ body {
         font-weight: bold;
         text-shadow: $shadow;
         color: #ff3333;
+        @media screen and (max-width: 768px) {
+            margin: auto;
+            text-align: center;
+        }
 
         &.ready {
             color: #4BB543;

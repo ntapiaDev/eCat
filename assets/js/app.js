@@ -36,7 +36,7 @@ if (document.querySelector(".main__cats")) {
 if (document.querySelector(".main__cat-info")) {
     let id = window.location.search.slice(4)
     document.querySelector(".main__cat-info__title").textContent = cats[id - 1].name
-    document.querySelector(".main__cat-info__img").src = `./assets/img/${id}_small.png`
+    document.querySelector(".main__cat-info__img").src = `./assets/img/${id}.png`
     document.querySelector(".color").textContent = cats[id - 1].color
     document.querySelector(".age").textContent = cats[id - 1].age
     document.querySelector(".race").textContent = cats[id - 1].race
@@ -141,7 +141,11 @@ if (localStorage.length > 0) {
 
                 // Quantité de chats
                 let catinCartQuant = document.createElement("p")
-                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + '</span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)'
+                let jours = "jour"
+                if (storage.quantity > 1) {
+                    jours = "jours"
+                }
+                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + " " + jours +'</span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)'
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartQuant)
 
                 // Vaccin & puces
