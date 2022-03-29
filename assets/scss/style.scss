@@ -184,11 +184,17 @@ body {
 
     &__img {
         width: 500px;
+        margin-bottom: 15px;
     }
 
     p {
         margin-bottom: 25px;
         width: 720px;
+        @media screen and (max-width: 768px) {
+            width: auto;
+            margin-top: 25px;
+            padding: 10px;
+        }
         span {
             color: red;
         }
@@ -199,6 +205,9 @@ body {
         font-size: 3em;
         margin-left: 25px;
         margin-bottom: 10px;
+        @media screen and (max-width: 768px) {
+            text-align: center;
+        }
     }
 
     &__form {
@@ -208,6 +217,13 @@ body {
         flex-wrap: wrap;
         label {
             margin: 10px;
+        }
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            width: auto;
+            input {
+                margin: 5px;
+            }
         }
     }
 
@@ -263,6 +279,9 @@ body {
             color: #000;
             font-size: 1.5em;
             text-align: center;
+            @media screen and (max-width: 768px) {
+                width: 80%;
+            }
         }
 
         &__content {
@@ -283,10 +302,27 @@ body {
             align-items: center;
             @media screen and (max-width: 768px) {
                 width: 75%;
+                p:nth-child(4) {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    i {
+                        margin-left: 5px;
+                    }
+                }
             }
 
             &__name {
                 font-size: 2em;
+                i {
+                    color: #000;
+                    font-size: 0.5em;
+                    position: relative;
+                    top: -10px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
             }
 
             &__img {
@@ -297,6 +333,10 @@ body {
             &__quant {
                 color: red;
                 font-size: 1.5em;
+            }
+
+            .add:hover, .remove:hover {
+                cursor: pointer;
             }
 
             p:nth-child(3) {
@@ -320,6 +360,9 @@ body {
             margin: auto;
             display: flex;
             flex-direction: column;
+            @media screen and (max-width: 768px) {
+                width: 90%;
+            }
 
             label {
                 margin: 10px 25px;

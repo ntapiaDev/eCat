@@ -126,13 +126,13 @@ if (localStorage.length > 0) {
                 
                 // Nom du chat
                 let catinCartName = document.createElement("p")
-                catinCartName.textContent = cats[storage.id - 1].name
+                catinCartName.innerHTML = cats[storage.id - 1].name + ` <i class="fa-solid fa-circle-minus" value="${storage.id}"></i>`
                 catinCartName.classList.add("main__cart__cat__name")
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartName)
 
                 // Quantité de chats
                 let catinCartQuant = document.createElement("p")
-                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + "</span>"
+                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + '</span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)'
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartQuant)
 
                 // Vaccin & puces
@@ -174,9 +174,39 @@ if (localStorage.length > 0) {
         }
     }
     if (document.querySelector(".main__cart__content")) {
+
+        // Edition du panier
+        let dismiss = document.querySelectorAll(".main__cart__cat__name i")
+        let add = document.querySelectorAll(".add")
+        let remove = document.querySelectorAll(".remove")
+        for (let i = 0; i < dismiss.length; i++) {
+            dismiss[i].addEventListener("click", function() {
+                localStorage.removeItem(dismiss[i].getAttribute("value"))
+                location.reload()
+            })
+            add[i].addEventListener("click", function() {
+                let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
+                storage.quantity = parseInt(storage.quantity) + 1
+                localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                location.reload()
+            })
+            remove[i].addEventListener("click", function() {
+                let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
+                if (storage.quantity > 1) {
+                    storage.quantity = parseInt(storage.quantity) - 1
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                } else {
+                    localStorage.removeItem(dismiss[i].getAttribute("value"))
+                }
+                location.reload()
+            })
+        }
+
+        // Prix total et message
         document.querySelector(".main__cart__price").innerHTML = `<u>Prix total :</u> ${price}€`
         document.querySelector("#message").innerHTML += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
+        // Envoie du panier
         document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
         function getMyCat() {
             alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")

@@ -223,11 +223,20 @@ body {
 
 .main__cat-info__img {
   width: 500px;
+  margin-bottom: 15px;
 }
 
 .main__cat-info p {
   margin-bottom: 25px;
   width: 720px;
+}
+
+@media screen and (max-width: 768px) {
+  .main__cat-info p {
+    width: auto;
+    margin-top: 25px;
+    padding: 10px;
+  }
 }
 
 .main__cat-info p span {
@@ -239,6 +248,12 @@ body {
   font-size: 3em;
   margin-left: 25px;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .main__cat-info .price {
+    text-align: center;
+  }
 }
 
 .main__cat-info__form {
@@ -255,6 +270,19 @@ body {
 
 .main__cat-info__form label {
   margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .main__cat-info__form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: auto;
+  }
+  .main__cat-info__form input {
+    margin: 5px;
+  }
 }
 
 .main__cat-info__number {
@@ -308,6 +336,12 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 768px) {
+  .main__cart__price {
+    width: 80%;
+  }
+}
+
 .main__cart__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -350,10 +384,34 @@ body {
   .main__cart__cat {
     width: 75%;
   }
+  .main__cart__cat p:nth-child(4) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .main__cart__cat p:nth-child(4) i {
+    margin-left: 5px;
+  }
 }
 
 .main__cart__cat__name {
   font-size: 2em;
+}
+
+.main__cart__cat__name i {
+  color: #000;
+  font-size: 0.5em;
+  position: relative;
+  top: -10px;
+}
+
+.main__cart__cat__name i:hover {
+  cursor: pointer;
 }
 
 .main__cart__cat__img {
@@ -364,6 +422,10 @@ body {
 .main__cart__cat__quant {
   color: red;
   font-size: 1.5em;
+}
+
+.main__cart__cat .add:hover, .main__cart__cat .remove:hover {
+  cursor: pointer;
 }
 
 .main__cart__cat p:nth-child(3) {
@@ -394,6 +456,12 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .main__cart__form {
+    width: 90%;
+  }
 }
 
 .main__cart__form label {
