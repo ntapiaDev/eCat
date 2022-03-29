@@ -151,18 +151,18 @@ if (localStorage.length > 0) {
                 let puces
                 let pucesInfo = ""
                 if (storage.vaccin) {
-                    vaccin = '<i class="fa-solid fa-check"></i>'
+                    vaccin = '<i class="fa-solid fa-check fa-vac"></i>'
                     vaccinInfo = "vaccination"
                     price += 5 * storage.quantity
                 } else {
-                    vaccin = '<i class="fa-solid fa-xmark"></i>'
+                    vaccin = '<i class="fa-solid fa-xmark fa-vac"></i>'
                 }
                 if (storage.puces) {
-                    puces = '<i class="fa-solid fa-check"></i>'
+                    puces = '<i class="fa-solid fa-check fa-puc"></i>'
                     pucesInfo = "traitement anti-puces"
                     price += 10 * storage.quantity
                 } else {
-                    puces = '<i class="fa-solid fa-xmark"></i>'
+                    puces = '<i class="fa-solid fa-xmark fa-puc"></i>'
                 }                
                 catinCartTreatment.innerHTML = `<u>Vaccination :</u> ${vaccin} <u>Traintement anti-puces :</u> ${puces}`
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
@@ -189,6 +189,8 @@ if (localStorage.length > 0) {
         let dismiss = document.querySelectorAll(".main__cart__cat__name i")
         let add = document.querySelectorAll(".add")
         let remove = document.querySelectorAll(".remove")
+        let vaccin = document.querySelectorAll(".fa-vac")
+        let puces = document.querySelectorAll(".fa-puc")
         for (let i = 0; i < dismiss.length; i++) {
             dismiss[i].addEventListener("click", function() {
                 localStorage.removeItem(dismiss[i].getAttribute("value"))
@@ -207,6 +209,35 @@ if (localStorage.length > 0) {
                     localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
                 } else {
                     localStorage.removeItem(dismiss[i].getAttribute("value"))
+                }
+                location.reload()
+            })
+            let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
+            vaccin[i].addEventListener("click", function() {
+                if (storage.vaccin) {
+                    vaccin[i].classList.remove("fa-check")
+                    vaccin[i].classList.add("fa-xmark")
+                    storage.vaccin = false
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                } else {
+                    vaccin[i].classList.remove("fa-xmark")
+                    vaccin[i].classList.add("fa-check")
+                    storage.vaccin = true
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                }
+                location.reload()
+            })
+            puces[i].addEventListener("click", function() {
+                if (storage.puces) {
+                    puces[i].classList.remove("fa-check")
+                    puces[i].classList.add("fa-xmark")
+                    storage.puces = false
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                } else {
+                    puces[i].classList.remove("fa-xmark")
+                    puces[i].classList.add("fa-check")
+                    storage.puces = true
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
                 }
                 location.reload()
             })

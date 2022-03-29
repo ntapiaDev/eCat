@@ -346,6 +346,9 @@ body {
             .fa-solid {
                 text-shadow: $shadow;
                 margin-right: 5px;
+                &:hover {
+                    cursor: pointer;
+                }
             }
             .fa-check {
                 color: #4BB543;

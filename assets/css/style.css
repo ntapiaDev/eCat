@@ -438,6 +438,10 @@ body {
   margin-right: 5px;
 }
 
+.main__cart__cat .fa-solid:hover {
+  cursor: pointer;
+}
+
 .main__cart__cat .fa-check {
   color: #4BB543;
 }
