@@ -1,22 +1,23 @@
 class Cat {
-    constructor(name, race, color, age, statut) {
+    constructor(name, race, color, age, price, statut) {
         this.name = name
         this.race = race
         this.color = color
         this.age = age
+        this.price = price
         this.statut = statut
     }
 }
 
-let gribouille = new Cat("Gribouille", "Main coon", "gris", "8 ans", true)
-let simba = new Cat("Simba", "Sphynx", "roux", "1 an et demi", true)
-let nala = new Cat("Nala", "Bengal", "blanc", "6 mois", false)
-let tigrou = new Cat("Tigrou", "bengal", "tigré", "1 ans", true)
-let maya = new Cat("Maya", "Ragdoll", "gris", "1 ans", true)
-let chipie = new Cat("Chipie", "Savannah", "blanc", "1 ans", false)
-let filou = new Cat("Filou", "Bleu russe", "gris", "1 ans", true)
-let caramel = new Cat("Caramel", "Main coon", "roux", "1 ans", true)
-let merlin = new Cat("Merlin", "Angora", "noir et blanc", "1 ans", true)
+let gribouille = new Cat("Gribouille", "Main coon", "gris", "8 ans", "12", true)
+let simba = new Cat("Simba", "Sphynx", "roux", "1 an et demi", "25", true)
+let nala = new Cat("Nala", "Bengal", "blanc", "6 mois", "30", false)
+let tigrou = new Cat("Tigrou", "bengal", "tigré", "1 ans", "18", true)
+let maya = new Cat("Maya", "Ragdoll", "gris", "1 ans", "15", true)
+let chipie = new Cat("Chipie", "Savannah", "blanc", "1 ans", "10", false)
+let filou = new Cat("Filou", "Bleu russe", "gris", "1 ans", "22", true)
+let caramel = new Cat("Caramel", "Main coon", "roux", "1 ans", "30", true)
+let merlin = new Cat("Merlin", "Angora", "noir et blanc", "1 ans", "15", true)
 
 let cats = []
 cats.push(gribouille, simba, nala, tigrou, maya, chipie, filou, caramel, merlin)
@@ -39,6 +40,8 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".color").textContent = cats[id - 1].color
     document.querySelector(".age").textContent = cats[id - 1].age
     document.querySelector(".race").textContent = cats[id - 1].race
+    let price = cats[id - 1].price
+    document.querySelector(".price").textContent = price + "€ seulement"
     document.querySelector(".main__cat-info__btn").value = `Ajouter ${cats[id - 1].name} au panier`
     let readyInfo = document.querySelector(".main__cat-info__ready")
     if (cats[id - 1].statut) {
@@ -54,6 +57,21 @@ if (document.querySelector(".main__cat-info")) {
     // Ajout au panier
     document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
     document.querySelector(".main__cat-info__number").value = 1
+
+        // Mise à jour du prix
+        function setPrice() {
+            if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
+                document.querySelector(".price").textContent = parseInt(price) + 15 + "€ seulement"
+            } else if (document.querySelector("#vaccin").checked) {
+                document.querySelector(".price").textContent = parseInt(price) + 5 + "€ seulement"
+            } else if (document.querySelector("#puces").checked) {
+                document.querySelector(".price").textContent = parseInt(price) + 10 + "€ seulement"
+            } else {
+                document.querySelector(".price").textContent = parseInt(price) + "€ seulement"
+            }
+        }
+        document.querySelector("#vaccin").addEventListener("change", setPrice)
+        document.querySelector("#puces").addEventListener("change", setPrice)
     function addCat() {
         
         if (document.querySelector(".main__cat-info__number").value > 0) {

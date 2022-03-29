@@ -192,6 +192,13 @@ body {
         }
     }
 
+    .price {
+        color: red;
+        font-size: 3em;
+        margin-left: 25px;
+        margin-bottom: 10px;
+    }
+
     &__form {
         width: 400px;
         display: flex;
@@ -242,6 +249,10 @@ body {
 
         &__title {
             padding: 25px;
+            text-align: center;
+        }
+
+        &__price {
             text-align: center;
         }
 

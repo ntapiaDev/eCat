@@ -239,6 +239,13 @@ body {
   color: red;
 }
 
+.main__cat-info .price {
+  color: red;
+  font-size: 3em;
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+
 .main__cat-info__form {
   width: 400px;
   display: -webkit-box;
@@ -292,6 +299,10 @@ body {
 
 .main__cart__title {
   padding: 25px;
+  text-align: center;
+}
+
+.main__cart__price {
   text-align: center;
 }
 
