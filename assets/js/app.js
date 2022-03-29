@@ -59,19 +59,21 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".main__cat-info__number").value = 1
 
         // Mise à jour du prix
-        function setPrice() {
-            if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
-                document.querySelector(".price").textContent = parseInt(price) + 15 + "€ seulement"
-            } else if (document.querySelector("#vaccin").checked) {
-                document.querySelector(".price").textContent = parseInt(price) + 5 + "€ seulement"
-            } else if (document.querySelector("#puces").checked) {
-                document.querySelector(".price").textContent = parseInt(price) + 10 + "€ seulement"
-            } else {
-                document.querySelector(".price").textContent = parseInt(price) + "€ seulement"
-            }
-        }
         document.querySelector("#vaccin").addEventListener("change", setPrice)
         document.querySelector("#puces").addEventListener("change", setPrice)
+        document.querySelector(".main__cat-info__number").addEventListener("change", setPrice)
+        function setPrice() {
+            if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
+                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 15 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+            } else if (document.querySelector("#vaccin").checked) {
+                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 5 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+            } else if (document.querySelector("#puces").checked) {
+                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 10 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+            } else {
+                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + "€ seulement"
+            }
+        }
+
     function addCat() {
         
         if (document.querySelector(".main__cat-info__number").value > 0) {
@@ -102,11 +104,13 @@ if (document.querySelector(".main__cat-info")) {
 
 if (localStorage.length > 0) {
     let j = 0
+    let price = 0
     for (let i = 0; i < 9; i++) {
         if (localStorage.getItem(i + 1) !== null) {
             let storage = JSON.parse(localStorage.getItem(i + 1))
             console.log(storage);
 
+            // Affichage des chats sélectionnés
             if (document.querySelector(".main__cart__content")) {
                 // Div contenant le chat
                 let catInCart = document.createElement("div")
@@ -137,11 +141,13 @@ if (localStorage.length > 0) {
                 let puces
                 if (storage.vaccin) {
                     vaccin = '<i class="fa-solid fa-check"></i>'
+                    price += 5 * storage.quantity
                 } else {
                     vaccin = '<i class="fa-solid fa-xmark"></i>'
                 }
                 if (storage.puces) {
                     puces = '<i class="fa-solid fa-check"></i>'
+                    price += 10 * storage.quantity
                 } else {
                     puces = '<i class="fa-solid fa-xmark"></i>'
                 }                
@@ -154,12 +160,13 @@ if (localStorage.length > 0) {
                 function getMyCat() {
                     localStorage.clear()
                 }
+
+                // Calcul du prix
+                price += storage.quantity * cats[i].price
             }
         }
     }
-
-    //JSON.parse("{\"id\":\"3\",\"quantity\":\"2\"}")
-
-    // marche avec un mais pas avec deux
-    // [,] liste à faire
+    if (document.querySelector(".main__cart__content")) {
+        document.querySelector(".main__cart__price").innerHTML = `<u>Prix total :</u> ${price}€`
+    }
 }
