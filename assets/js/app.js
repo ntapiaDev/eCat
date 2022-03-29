@@ -41,7 +41,7 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".age").textContent = cats[id - 1].age
     document.querySelector(".race").textContent = cats[id - 1].race
     let price = cats[id - 1].price
-    document.querySelector(".price").textContent = price + "€ seulement"
+    document.querySelector(".price").textContent = price + "€/jour seulement"
     document.querySelector(".main__cat-info__btn").value = `Ajouter ${cats[id - 1].name} au panier`
     let readyInfo = document.querySelector(".main__cat-info__ready")
     if (cats[id - 1].statut) {
@@ -56,6 +56,14 @@ if (document.querySelector(".main__cat-info")) {
 
     // Ajout au panier
     document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
+    document.querySelector(".main__cat-info__number").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            addCat()
+            location.href = "/cart.html"
+        }
+    })
+
     document.querySelector(".main__cat-info__number").value = 1
 
         // Mise à jour du prix
@@ -102,6 +110,7 @@ if (document.querySelector(".main__cat-info")) {
 
 // Panier
 
+let order = []
 if (localStorage.length > 0) {
     let j = 0
     let price = 0
@@ -159,6 +168,7 @@ if (localStorage.length > 0) {
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
 
                 j++
+                order.push(storage)
 
                 // Calcul du prix
                 price += storage.quantity * cats[i].price
@@ -212,5 +222,7 @@ if (localStorage.length > 0) {
             alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
             localStorage.clear()
         }
+
+        console.log("La commande est : " + JSON.stringify(order))
     }
 }

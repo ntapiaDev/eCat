@@ -286,9 +286,10 @@ body {
 }
 
 .main__cat-info__number {
-  width: 150px;
+  width: 60px;
   padding: 5px;
   margin-right: 10px;
+  text-align: center;
 }
 
 .main__cat-info__btn {
