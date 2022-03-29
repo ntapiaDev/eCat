@@ -398,9 +398,14 @@ body {
   margin: 10px 25px;
 }
 
+.main__cart__form input {
+  padding: 10px;
+}
+
 .main__cart__form textarea {
   height: 250px;
   width: 100%;
+  padding: 10px;
 }
 
 .main__cart__form__submit {

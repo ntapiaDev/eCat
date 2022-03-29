@@ -94,7 +94,7 @@ if (document.querySelector(".main__cat-info")) {
             let cat = JSON.stringify(new choosenCat(id, statut, vaccin, puces, quantity))
             localStorage.setItem(id, cat);
         } else {
-            alert("Vous n'avez pas sélectionné de quantité")
+            alert("Vous n'avez pas sélectionné de quantité valide.")
             document.querySelector(".main__cat-info__btn").parentNode.href = "#"
         }
     }
@@ -138,15 +138,19 @@ if (localStorage.length > 0) {
                 // Vaccin & puces
                 let catinCartTreatment = document.createElement("p")
                 let vaccin
+                let vaccinInfo = ""
                 let puces
+                let pucesInfo = ""
                 if (storage.vaccin) {
                     vaccin = '<i class="fa-solid fa-check"></i>'
+                    vaccinInfo = "vaccination"
                     price += 5 * storage.quantity
                 } else {
                     vaccin = '<i class="fa-solid fa-xmark"></i>'
                 }
                 if (storage.puces) {
                     puces = '<i class="fa-solid fa-check"></i>'
+                    pucesInfo = "traitement anti-puces"
                     price += 10 * storage.quantity
                 } else {
                     puces = '<i class="fa-solid fa-xmark"></i>'
@@ -155,18 +159,28 @@ if (localStorage.length > 0) {
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
 
                 j++
-                document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
-        
-                function getMyCat() {
-                    localStorage.clear()
-                }
 
                 // Calcul du prix
                 price += storage.quantity * cats[i].price
+
+                // Génération du message récapitulatif
+                if (vaccinInfo === "" && pucesInfo === "") {
+                    vaccinInfo = "aucune"
+                } else if (vaccinInfo !== "" && pucesInfo !== "") {
+                    vaccinInfo = "vaccination,"
+                }
+                document.querySelector("#message").innerHTML += `Chat désiré : ${cats[storage.id - 1].name} - Quantité : ${storage.quantity} - Options : ${vaccinInfo} ${pucesInfo} \n`
             }
         }
     }
     if (document.querySelector(".main__cart__content")) {
         document.querySelector(".main__cart__price").innerHTML = `<u>Prix total :</u> ${price}€`
+        document.querySelector("#message").innerHTML += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
+
+        document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
+        function getMyCat() {
+            alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
+            localStorage.clear()
+        }
     }
 }
