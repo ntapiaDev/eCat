@@ -90,21 +90,47 @@ if (localStorage.length > 0) {
             console.log(storage);
 
             if (document.querySelector(".main__cart__content")) {
+                // Div contenant le chat
                 let catInCart = document.createElement("div")
                 catInCart.classList.add("main__cart__cat")
                 document.querySelector(".main__cart__content").appendChild(catInCart)
         
+                // Image du chat
                 let catinCartImg = document.createElement("img")
                 catinCartImg.classList.add("main__cart__cat__img")    
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartImg)
                 catinCartImg.src = `./assets/img/${storage.id}.png`
                 console.log(catinCartImg.src);
                 
+                // Nom du chat
                 let catinCartName = document.createElement("p")
                 catinCartName.textContent = cats[storage.id - 1].name
+                catinCartName.classList.add("main__cart__cat__name")
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartName)
+
+                // Quantité de chats
+                let catinCartQuant = document.createElement("p")
+                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + "</span>"
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartQuant)
+
+                // Vaccin & puces
+                let catinCartTreatment = document.createElement("p")
+                let vaccin
+                let puces
+                if (storage.vaccin) {
+                    vaccin = '<i class="fa-solid fa-check"></i>'
+                } else {
+                    vaccin = '<i class="fa-solid fa-xmark"></i>'
+                }
+                if (storage.puces) {
+                    puces = '<i class="fa-solid fa-check"></i>'
+                } else {
+                    puces = '<i class="fa-solid fa-xmark"></i>'
+                }                
+                catinCartTreatment.innerHTML = `<u>Vaccination :</u> ${vaccin} <u>Traintement anti-puces :</u> ${puces}`
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
+
                 j++
-        
                 document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
         
                 function getMyCat() {
