@@ -1,5 +1,6 @@
 class Cat {
-    constructor(name, race, color, age, price, statut) {
+    constructor(id, name, race, color, age, price, statut) {
+        this.id = id
         this.name = name
         this.race = race
         this.color = color
@@ -9,22 +10,31 @@ class Cat {
     }
 }
 
-let gribouille = new Cat("Gribouille", "Main coon", "gris", "8 ans", "12", true)
-let simba = new Cat("Simba", "Sphynx", "roux", "1 an et demi", "25", true)
-let nala = new Cat("Nala", "Bengal", "blanc", "6 mois", "30", false)
-let tigrou = new Cat("Tigrou", "bengal", "tigré", "1 ans", "18", true)
-let maya = new Cat("Maya", "Ragdoll", "gris", "1 ans", "15", true)
-let chipie = new Cat("Chipie", "Savannah", "blanc", "1 ans", "10", false)
-let filou = new Cat("Filou", "Bleu russe", "gris", "1 ans", "22", true)
-let caramel = new Cat("Caramel", "Main coon", "roux", "1 ans", "30", true)
-let merlin = new Cat("Merlin", "Angora", "noir et blanc", "1 ans", "15", true)
+let cats = [
+    gribouille = new Cat(1, "Gribouille", "Main coon", "gris", "8 ans", "12", true),
+    simba = new Cat(2, "Simba", "Sphynx", "roux", "1 an et demi", "25", true),
+    nala = new Cat(3, "Nala", "Bengal", "blanc", "6 mois", "30", false),
+    tigrou = new Cat(4, "Tigrou", "bengal", "tigré", "1 ans", "18", true),
+    maya = new Cat(5, "Maya", "Ragdoll", "gris", "1 ans", "15", true),
+    chipie = new Cat(6, "Chipie", "Savannah", "blanc", "1 ans", "10", false),
+    filou = new Cat(7, "Filou", "Bleu russe", "gris", "1 ans", "22", true),
+    caramel = new Cat(8, "Caramel", "Main coon", "roux", "1 ans", "30", true),
+    merlin = new Cat(9, "Merlin", "Angora", "noir et blanc", "1 ans", "15", true)
+]
 
-let cats = []
-cats.push(gribouille, simba, nala, tigrou, maya, chipie, filou, caramel, merlin)
-
-// Affichage de la page d'accueil
+// Affichage de la page d'accueil dynamique
 if (document.querySelector(".main__cats")) {
+    // Utilisation du template
+    if ("content" in document.createElement("template")) {
+        for (let i = 0; i < cats.length; i++) {
+            let mainCat = document.querySelector("#main__cat")
+            let clone = document.importNode(mainCat.content, true)  
+            document.querySelector(".main__cats__container").appendChild(clone)
+        }
+    }
     for (let i = 0; i < cats.length; i++) {
+        document.querySelectorAll(".main__cat a")[i].href = `./cats.html?id=${cats[i].id}`
+        document.querySelectorAll(".main__cat img")[i].src = `./assets/img/${cats[i].id}_small.png`
         document.querySelectorAll(".main__cat__name")[i].textContent = cats[i].name
         document.querySelectorAll(".main__cat__race")[i].textContent = cats[i].race
         document.querySelectorAll(".main__cat__color")[i].textContent = cats[i].name
