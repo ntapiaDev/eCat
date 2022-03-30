@@ -38,6 +38,18 @@
         <section class="main__cart">
             <h1 class="main__cart__title">Vos petits chouchous :</h1>
             <p class="main__cart__price">Votre panier est vide.</p>
+            <!-- Template affichage du prix -->
+            <template id="price">
+                <span class="underline">Prix total :</span><span class="price"></span>
+            </template>
+            <!-- Template affichage du prix -->
+            <template id="quantity">
+                <p><span class="underline">Quantité :</span> <span class="main__cart__cat__quant"></span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)</p>
+            </template>
+            <!-- Template vaccin & puces -->
+            <template id="vac-puc">
+                <p><span class="underline">Vaccination :</span> <span class="vaccination-statut"></span> <span class="underline">Traitement anti-puces :</span> <span class="puces-statut"></span></p>
+            </template>
             <div class="main__cart__content"></div>
 
             <!-- Formulaire de contact -->

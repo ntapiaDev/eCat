@@ -62,7 +62,6 @@ if (document.querySelector(".main__cat-info")) {
         readyInfo.textContent = "Nous avons encore besoin de nous occuper de ce chat avant qu'il ne puisse être adopté"
         document.querySelector(".main__cat-info__btn").disabled = true
     }
-    
 
     // Ajout au panier
     document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
@@ -119,7 +118,6 @@ if (document.querySelector(".main__cat-info")) {
 }
 
 // Panier
-
 let order = []
 if (localStorage.length > 0) {
     let j = 0
@@ -141,7 +139,6 @@ if (localStorage.length > 0) {
                 catinCartImg.classList.add("main__cart__cat__img")    
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartImg)
                 catinCartImg.src = `./assets/img/${storage.id}.png`
-                console.log(catinCartImg.src);
                 
                 // Nom du chat
                 let catinCartName = document.createElement("p")
@@ -155,86 +152,39 @@ if (localStorage.length > 0) {
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartName)
 
                 // Quantité de chats
-                let catinCartQuant = document.createElement("p")
                 let jours = "jour"
                 if (storage.quantity > 1) {
                     jours = "jours"
                 }
-                let quantity = document.createElement("span")
-                quantity.classList.add("underline")
-                quantity.textContent = "Quantité :"
-                let spanEmpty = document.createElement("span")
-                spanEmpty.textContent = " "
-                let spanQuant = document.createElement("span")
-                spanQuant.classList.add("main__cart__cat__quant")
-                spanQuant.textContent = storage.quantity + " " + jours + " "
-                let spanDebut = document.createElement("span")
-                spanDebut.textContent = "("
-                let spanAdd = document.createElement("span")
-                spanAdd.classList.add("add")
-                spanAdd.textContent = "ajouter"
-                let span = document.createElement("span")
-                span.textContent = " - "
-                let spanRemove = document.createElement("span")
-                spanRemove.classList.add("remove")
-                spanRemove.textContent = "retirer"
-                let spanFinal = document.createElement("span")
-                spanFinal.textContent = ")"
-                catinCartQuant.appendChild(quantity)
-                catinCartQuant.appendChild(spanEmpty)
-                catinCartQuant.appendChild(spanQuant)
-                catinCartQuant.appendChild(spanDebut)
-                catinCartQuant.appendChild(spanAdd)
-                catinCartQuant.appendChild(span)
-                catinCartQuant.appendChild(spanRemove)
-                catinCartQuant.appendChild(spanFinal)
-                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartQuant)
+                let quantity = document.querySelector("#quantity")
+                let cloneQ = document.importNode(quantity.content, true)
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(cloneQ)
+                document.querySelectorAll(".main__cart__cat__quant")[j].textContent = storage.quantity + " " + jours
 
                 // Vaccin & puces
-                let catinCartTreatment = document.createElement("p")
-                let vacStatut = document.createElement("span")
-                vacStatut.classList.add("underline")
-                vacStatut.textContent = "Vaccination"
-                let vacCheck = document.createElement("span")
-                    vacCheck.classList.add("fa-solid")
-                    vacCheck.classList.add("fa-vac")
                 let vaccinInfo = ""
+                let pucesInfo = ""
+                let vacPuc = document.querySelector("#vac-puc")
+                let cloneVP = document.importNode(vacPuc.content, true)
+                document.querySelectorAll(".main__cart__cat")[j].appendChild(cloneVP)
+                document.querySelectorAll(".vaccination-statut")[j].classList.add("fa-solid")
+                document.querySelectorAll(".vaccination-statut")[j].classList.add("fa-vac")
                 if (storage.vaccin) {
-                    vacCheck.classList.add("fa-check")
+                    document.querySelectorAll(".vaccination-statut")[j].classList.add("fa-check")
                     price += 5 * storage.quantity
                     vaccinInfo = "vaccination"
                 } else {
-                    vacCheck.classList.add("fa-xmark")
+                    document.querySelectorAll(".vaccination-statut")[j].classList.add("fa-xmark")
                 }
-
-                let pucStatut = document.createElement("span")
-                pucStatut.classList.add("underline")
-                pucStatut.textContent = "Traitement anti-puces"
-                let pucCheck = document.createElement("span")
-                    pucCheck.classList.add("fa-solid")
-                    pucCheck.classList.add("fa-puc")
-                let pucesInfo = ""
+                document.querySelectorAll(".puces-statut")[j].classList.add("fa-solid")
+                document.querySelectorAll(".puces-statut")[j].classList.add("fa-puc")
                 if (storage.puces) {
-                    pucCheck.classList.add("fa-check")
+                    document.querySelectorAll(".puces-statut")[j].classList.add("fa-check")
                     price += 10 * storage.quantity
                     pucesInfo = "traitement anti-puces"
                 } else {
-                    pucCheck.classList.add("fa-xmark")
+                    document.querySelectorAll(".puces-statut")[j].classList.add("fa-xmark")
                 }
-
-                let spanEmpty2 = document.createElement("span")
-                spanEmpty2.textContent = " "
-                let spanEmpty3 = document.createElement("span")
-                spanEmpty3.textContent = " "
-
-                catinCartTreatment.appendChild(vacStatut)
-                catinCartTreatment.appendChild(spanEmpty2)
-                catinCartTreatment.appendChild(vacCheck)
-                catinCartTreatment.appendChild(pucStatut)
-                catinCartTreatment.appendChild(spanEmpty3)
-                catinCartTreatment.appendChild(pucCheck)
-
-                document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
 
                 j++
                 order.push(storage)
@@ -313,17 +263,11 @@ if (localStorage.length > 0) {
         }
 
         // Prix total et message
-        let spanPrice = document.createElement("span")
-        spanPrice.classList.add("underline")
-        spanPrice.textContent = "Prix total :"
-        let spanEmpty4 = document.createElement("span")
-        spanEmpty4.textContent = " "
-        let spanPriceValue = document.createElement("span")
-        spanPriceValue.textContent = price + "€"
+        let displayPrice = document.querySelector("#price")
+        let clone = document.importNode(displayPrice.content, true)
         document.querySelector(".main__cart__price").textContent = ""
-        document.querySelector(".main__cart__price").appendChild(spanPrice)
-        document.querySelector(".main__cart__price").appendChild(spanEmpty4)
-        document.querySelector(".main__cart__price").appendChild(spanPriceValue)
+        document.querySelector(".main__cart__price").appendChild(clone)
+        document.querySelector(".price").textContent = " " + price + "€"
         document.querySelector("#message").textContent += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
         // Contrôle du formulaire
