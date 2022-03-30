@@ -326,43 +326,56 @@ if (localStorage.length > 0) {
         document.querySelector(".main__cart__price").appendChild(spanPriceValue)
         document.querySelector("#message").textContent += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
-        // Vérification du formulaire
-        let regexName = new RegExp('[^a-zA-ZÀ-ÿ]')
-        let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        let regexMessage = /[a-z0-9\.\-\_]+@[a-z]+\.[a-z]{2,3}$/
-
+        // Contrôle du formulaire
         let textareaLength = document.querySelector("#message").value.length
-        document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
+        function regex(e) {
+            let valid = true
+            let regexName = /[^a-zA-ZÀ-ÿ]/
+            let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+            let regexMessage = /[a-z0-9\.\-\_]+@[a-z]+\.[a-z]{2,3}$/
+            
+            // Controle du nom
             if (regexName.test(document.querySelector("#name").value) || document.querySelector("#name").value.length < 3) {
                 document.querySelector("#name").style.border = "3px double red"
                 document.querySelector(".label-name").textContent = "Merci de rentrer un nom valide (3 caractères minimum)"
-                e.preventDefault()
-            } else if (!regexEmail.test(document.querySelector("#email").value)) {
-                document.querySelector("#name").style.border = "3px double green"
-                document.querySelector(".label-name").textContent = ""
-                document.querySelector("#email").style.border = "3px double red"
-                document.querySelector(".label-email").textContent = "Merci de rentrer une adresse valide"
-                e.preventDefault()
-            } else if (regexMessage.test(document.querySelector("#message").value) || document.querySelector("#message").value.length < textareaLength + 10) {
-                document.querySelector("#name").style.border = "3px double green"
-                document.querySelector(".label-name").textContent = ""
-                document.querySelector("#email").style.border = "3px double green"
-                document.querySelector(".label-email").textContent = ""
-                document.querySelector("#message").style.border = "3px double red"
-                document.querySelector(".label-message").textContent = "Merci de nous laisser un message complémentaire (10 caractères minimum)"
+                valid = false
                 e.preventDefault()
             } else {
                 document.querySelector("#name").style.border = "3px double green"
                 document.querySelector(".label-name").textContent = ""
+            }
+            // Controle de l'adresse email
+            if (!regexEmail.test(document.querySelector("#email").value)) {
+                document.querySelector("#email").style.border = "3px double red"
+                document.querySelector(".label-email").textContent = "Merci de rentrer une adresse valide"
+                valid = false
+                e.preventDefault()
+            } else {
                 document.querySelector("#email").style.border = "3px double green"
                 document.querySelector(".label-email").textContent = ""
+            }
+            // Controle du message
+            if (regexMessage.test(document.querySelector("#message").value) || document.querySelector("#message").value.length < textareaLength + 10) {
+                document.querySelector("#message").style.border = "3px double red"
+                document.querySelector(".label-message").textContent = "Merci de nous laisser un message complémentaire (10 caractères minimum)"
+                valid = false
+                e.preventDefault()
+            } else {
                 document.querySelector("#message").style.border = "3px double green"
                 document.querySelector(".label-message").textContent = ""
-                alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
+            }
+            return valid
+        }
+
+        //Envoi du panier
+        document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
+            let isValid = regex(e)
+            if (isValid) {
+                alert("Merci pour votre commande, nous allons revenir vers vous très bientôt !")
                 localStorage.clear()
             }
         })
-
+        
         console.log("La commande est : " + JSON.stringify(order))
     }
 }
