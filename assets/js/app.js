@@ -326,12 +326,32 @@ if (localStorage.length > 0) {
         document.querySelector(".main__cart__price").appendChild(spanPriceValue)
         document.querySelector("#message").textContent += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
-        // Envoie du panier
-        document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)
-        function getMyCat() {
-            alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
-            localStorage.clear()
-        }
+        // Vérification du formulaire
+        let regexName = new RegExp('[^a-zA-ZÀ-ÿ]')
+        let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        let regexMessage = /[a-z0-9\.\-\_]+@[a-z]+\.[a-z]{2,3}$/
+
+        document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
+            if (regexName.test(document.querySelector("#name").value) || document.querySelector("#name").value.length < 3) {
+                document.querySelector("#name").style.border = "3px double red"
+                e.preventDefault()
+            } else if (!regexEmail.test(document.querySelector("#email").value)) {
+                document.querySelector("#name").style.border = "3px double green"
+                document.querySelector("#email").style.border = "3px double red"
+                e.preventDefault()
+            } else if (regexMessage.test(document.querySelector("#message").value) || document.querySelector("#message").value.length < 50) {
+                document.querySelector("#name").style.border = "3px double green"
+                document.querySelector("#email").style.border = "3px double green"
+                document.querySelector("#message").style.border = "3px double red"
+                e.preventDefault()
+            } else {
+                document.querySelector("#name").style.border = "3px double green"
+                document.querySelector("#email").style.border = "3px double green"
+                document.querySelector("#message").style.border = "3px double green"
+                alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
+                // localStorage.clear()
+            }
+        })
 
         console.log("La commande est : " + JSON.stringify(order))
     }
