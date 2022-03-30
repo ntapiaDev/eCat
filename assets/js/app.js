@@ -41,36 +41,25 @@ if (document.querySelector(".main__cat-info")) {
         document.querySelector(".main__cat-info__btn").disabled = true
     }
 
-    // Ajout au panier
-    document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
-    document.querySelector(".main__cat-info__number").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-            e.preventDefault()
-            addCat()
-            location.href = "/cart.html"
-        }
-    })
-
+    // Mise à jour du prix
     document.querySelector(".main__cat-info__number").value = 1
-
-        // Mise à jour du prix
-        document.querySelector("#vaccin").addEventListener("change", setPrice)
-        document.querySelector("#puces").addEventListener("change", setPrice)
-        document.querySelector(".main__cat-info__number").addEventListener("change", setPrice)
-        function setPrice() {
-            if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
-                update(15)
-            } else if (document.querySelector("#vaccin").checked) {
-                update(5)
-            } else if (document.querySelector("#puces").checked) {
-                update(10)
-            } else {
-                update(0)
-            }
-            function update(value) {
-                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€/jour seulement"
-            }
+    document.querySelector("#vaccin").addEventListener("change", setPrice)
+    document.querySelector("#puces").addEventListener("change", setPrice)
+    document.querySelector(".main__cat-info__number").addEventListener("change", setPrice)
+    function setPrice() {
+        if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
+            update(15)
+        } else if (document.querySelector("#vaccin").checked) {
+            update(5)
+        } else if (document.querySelector("#puces").checked) {
+            update(10)
+        } else {
+            update(0)
         }
+        function update(value) {
+            document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€/jour seulement"
+        }
+    }
 
     function addCat() {
         if (document.querySelector(".main__cat-info__number").value > 0) {
@@ -95,6 +84,16 @@ if (document.querySelector(".main__cat-info")) {
             document.querySelector(".main__cat-info__btn").parentNode.href = "#"
         }
     }
+
+    // Ajout au panier
+    document.querySelector(".main__cat-info__btn").addEventListener("click", addCat)
+    document.querySelector(".main__cat-info__number").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            addCat()
+            location.href = "/cart.html"
+        }
+    })
 }
 
 // Panier
@@ -182,8 +181,8 @@ if (localStorage.length > 0) {
             }
         }
     }
-    if (document.querySelector(".main__cart__content")) {
 
+    if (document.querySelector(".main__cart__content")) {
         // Edition du panier
         let dismiss = document.querySelectorAll(".main__cart__cat__name span")
         let add = document.querySelectorAll(".add")
@@ -191,18 +190,20 @@ if (localStorage.length > 0) {
         let vaccin = document.querySelectorAll(".fa-vac")
         let puces = document.querySelectorAll(".fa-puc")
         for (let i = 0; i < dismiss.length; i++) {
+            let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
+            // Supprimer
             dismiss[i].addEventListener("click", function() {
                 localStorage.removeItem(dismiss[i].getAttribute("value"))
                 location.reload()
             })
+            // Ajouter une quantité
             add[i].addEventListener("click", function() {
-                let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
                 storage.quantity = parseInt(storage.quantity) + 1
                 localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
                 location.reload()
             })
+            // Retirer une quantité
             remove[i].addEventListener("click", function() {
-                let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
                 if (storage.quantity > 1) {
                     storage.quantity = parseInt(storage.quantity) - 1
                     localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
@@ -211,7 +212,7 @@ if (localStorage.length > 0) {
                 }
                 location.reload()
             })
-            let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
+            // Modification du vaccin
             vaccin[i].addEventListener("click", function() {
                 if (storage.vaccin) {
                     vaccin[i].classList.remove("fa-check")
@@ -226,6 +227,7 @@ if (localStorage.length > 0) {
                 }
                 location.reload()
             })
+            // Modification du traitement anti-puces
             puces[i].addEventListener("click", function() {
                 if (storage.puces) {
                     puces[i].classList.remove("fa-check")
@@ -295,7 +297,7 @@ if (localStorage.length > 0) {
         document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
             let isValid = regex(e)
             if (isValid) {
-                alert("Merci pour votre commande, nous allons revenir vers vous très bientôt !")
+                alert("Merci pour votre commande, nous allons revenir vers vous très prochainement !")
                 localStorage.clear()
             }
         })
