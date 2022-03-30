@@ -1,26 +1,4 @@
-class Cat {
-    constructor(id, name, race, color, age, price, statut) {
-        this.id = id
-        this.name = name
-        this.race = race
-        this.color = color
-        this.age = age
-        this.price = price
-        this.statut = statut
-    }
-}
-
-let cats = [
-    gribouille = new Cat(1, "Gribouille", "Main coon", "gris", "8 ans", "12", true),
-    simba = new Cat(2, "Simba", "Sphynx", "roux", "1 an et demi", "25", true),
-    nala = new Cat(3, "Nala", "Bengal", "blanc", "6 mois", "30", false),
-    tigrou = new Cat(4, "Tigrou", "bengal", "tigré", "1 ans", "18", true),
-    maya = new Cat(5, "Maya", "Ragdoll", "gris", "1 ans", "15", true),
-    chipie = new Cat(6, "Chipie", "Savannah", "blanc", "1 ans", "10", false),
-    filou = new Cat(7, "Filou", "Bleu russe", "gris", "1 ans", "22", true),
-    caramel = new Cat(8, "Caramel", "Main coon", "roux", "1 ans", "30", true),
-    merlin = new Cat(9, "Merlin", "Angora", "noir et blanc", "1 ans", "15", true)
-]
+import cats from "./cats.js"
 
 // Affichage de la page d'accueil dynamique
 if (document.querySelector(".main__cats")) {
@@ -37,7 +15,7 @@ if (document.querySelector(".main__cats")) {
         document.querySelectorAll(".main__cat img")[i].src = `./assets/img/${cats[i].id}_small.png`
         document.querySelectorAll(".main__cat__name")[i].textContent = cats[i].name
         document.querySelectorAll(".main__cat__race")[i].textContent = cats[i].race
-        document.querySelectorAll(".main__cat__color")[i].textContent = cats[i].name
+        document.querySelectorAll(".main__cat__color")[i].textContent = cats[i].color
         document.querySelectorAll(".main__cat__age")[i].textContent = cats[i].age
     }
 }
@@ -81,18 +59,20 @@ if (document.querySelector(".main__cat-info")) {
         document.querySelector(".main__cat-info__number").addEventListener("change", setPrice)
         function setPrice() {
             if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
-                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 15 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+                update(15)
             } else if (document.querySelector("#vaccin").checked) {
-                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 5 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+                update(5)
             } else if (document.querySelector("#puces").checked) {
-                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + 10 * document.querySelector(".main__cat-info__number").value + "€ seulement"
+                update(10)
             } else {
-                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + "€ seulement"
+                update(0)
+            }
+            function update(value) {
+                document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€/jour seulement"
             }
         }
 
     function addCat() {
-        
         if (document.querySelector(".main__cat-info__number").value > 0) {
             class choosenCat {
                 constructor(id, statut, vaccin, puces, quantity) {
@@ -107,7 +87,7 @@ if (document.querySelector(".main__cat-info")) {
             let statut = cats[id - 1].statut
             let vaccin = document.querySelector("#vaccin").checked
             let puces = document.querySelector("#puces").checked
-            let quantity = document.querySelector(".main__cat-info__number").value
+            let quantity = parseInt(document.querySelector(".main__cat-info__number").value)
             let cat = JSON.stringify(new choosenCat(id, statut, vaccin, puces, quantity))
             localStorage.setItem(id, cat);
         } else {
