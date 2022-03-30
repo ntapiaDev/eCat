@@ -405,6 +405,12 @@ body {
 
             label {
                 margin: 10px 25px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .label-name, .label-email, .label-message{
+                color: #ff3333;
+                text-shadow: $shadow;
             }
             input {
                 padding: 10px;

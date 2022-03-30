@@ -529,6 +529,17 @@ body {
 
 .main__cart__form label {
   margin: 10px 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.main__cart__form .label-name, .main__cart__form .label-email, .main__cart__form .label-message {
+  color: #ff3333;
+  text-shadow: 1px 0 0 #FFF, 1px 1px 0 #FFF, 0 1px 0 #FFF, -1px 1px 0 #FFF, -1px 0 0 #FFF, -1px -1px 0 #FFF, 0 -1px 0 #FFF, 1px -1px 0 #FFF;
 }
 
 .main__cart__form input {

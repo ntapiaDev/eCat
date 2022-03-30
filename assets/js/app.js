@@ -331,25 +331,35 @@ if (localStorage.length > 0) {
         let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         let regexMessage = /[a-z0-9\.\-\_]+@[a-z]+\.[a-z]{2,3}$/
 
+        let textareaLength = document.querySelector("#message").value.length
         document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
             if (regexName.test(document.querySelector("#name").value) || document.querySelector("#name").value.length < 3) {
                 document.querySelector("#name").style.border = "3px double red"
+                document.querySelector(".label-name").textContent = "Merci de rentrer un nom valide (3 caractères minimum)"
                 e.preventDefault()
             } else if (!regexEmail.test(document.querySelector("#email").value)) {
                 document.querySelector("#name").style.border = "3px double green"
+                document.querySelector(".label-name").textContent = ""
                 document.querySelector("#email").style.border = "3px double red"
+                document.querySelector(".label-email").textContent = "Merci de rentrer une adresse valide"
                 e.preventDefault()
-            } else if (regexMessage.test(document.querySelector("#message").value) || document.querySelector("#message").value.length < 50) {
+            } else if (regexMessage.test(document.querySelector("#message").value) || document.querySelector("#message").value.length < textareaLength + 10) {
                 document.querySelector("#name").style.border = "3px double green"
+                document.querySelector(".label-name").textContent = ""
                 document.querySelector("#email").style.border = "3px double green"
+                document.querySelector(".label-email").textContent = ""
                 document.querySelector("#message").style.border = "3px double red"
+                document.querySelector(".label-message").textContent = "Merci de nous laisser un message complémentaire (10 caractères minimum)"
                 e.preventDefault()
             } else {
                 document.querySelector("#name").style.border = "3px double green"
+                document.querySelector(".label-name").textContent = ""
                 document.querySelector("#email").style.border = "3px double green"
+                document.querySelector(".label-email").textContent = ""
                 document.querySelector("#message").style.border = "3px double green"
+                document.querySelector(".label-message").textContent = ""
                 alert("Merci pour votre commande, nous allez revenir vers vous très bientôt !")
-                // localStorage.clear()
+                localStorage.clear()
             }
         })
 
