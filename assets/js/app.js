@@ -26,9 +26,9 @@ cats.push(gribouille, simba, nala, tigrou, maya, chipie, filou, caramel, merlin)
 if (document.querySelector(".main__cats")) {
     for (let i = 0; i < cats.length; i++) {
         document.querySelectorAll(".main__cat__name")[i].textContent = cats[i].name
-        document.querySelectorAll(".main__cat__race")[i].innerHTML = "<strong>Race : </strong>" + cats[i].race
-        document.querySelectorAll(".main__cat__color")[i].innerHTML = "<strong>Couleur : </strong>" + cats[i].name
-        document.querySelectorAll(".main__cat__age")[i].innerHTML = "<strong>Age : </strong>" + cats[i].age
+        document.querySelectorAll(".main__cat__race")[i].textContent = cats[i].race
+        document.querySelectorAll(".main__cat__color")[i].textContent = cats[i].name
+        document.querySelectorAll(".main__cat__age")[i].textContent = cats[i].age
     }
 }
 
@@ -45,11 +45,11 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector(".main__cat-info__btn").value = `Ajouter ${cats[id - 1].name} au panier`
     let readyInfo = document.querySelector(".main__cat-info__ready")
     if (cats[id - 1].statut) {
-        readyInfo.innerHTML = "Votre chat est prêt à être adopté"
+        readyInfo.textContent = "Votre chat est prêt à être adopté"
         readyInfo.classList.add("ready")
         document.querySelector(".main__cat-info__btn").classList.add("enable")
     } else {
-        readyInfo.innerHTML = "Nous avons encore besoin de nous occuper de ce chat avant qu'il ne puisse être adopté"
+        readyInfo.textContent = "Nous avons encore besoin de nous occuper de ce chat avant qu'il ne puisse être adopté"
         document.querySelector(".main__cat-info__btn").disabled = true
     }
     
@@ -135,8 +135,13 @@ if (localStorage.length > 0) {
                 
                 // Nom du chat
                 let catinCartName = document.createElement("p")
-                catinCartName.innerHTML = cats[storage.id - 1].name + ` <i class="fa-solid fa-circle-minus" value="${storage.id}"></i>`
+                let dismiss = document.createElement("span")
+                dismiss.classList.add("fa-solid")
+                dismiss.classList.add("fa-circle-minus")
+                dismiss.setAttribute("value", `${storage.id}`)
+                catinCartName.textContent = cats[storage.id - 1].name + " "
                 catinCartName.classList.add("main__cart__cat__name")
+                catinCartName.appendChild(dismiss)
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartName)
 
                 // Quantité de chats
@@ -145,30 +150,80 @@ if (localStorage.length > 0) {
                 if (storage.quantity > 1) {
                     jours = "jours"
                 }
-                catinCartQuant.innerHTML = '<u>Quantité :</u> <span class="main__cart__cat__quant">' + storage.quantity + " " + jours +'</span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)'
+                let quantity = document.createElement("span")
+                quantity.classList.add("underline")
+                quantity.textContent = "Quantité :"
+                let spanEmpty = document.createElement("span")
+                spanEmpty.textContent = " "
+                let spanQuant = document.createElement("span")
+                spanQuant.classList.add("main__cart__cat__quant")
+                spanQuant.textContent = storage.quantity + " " + jours + " "
+                let spanDebut = document.createElement("span")
+                spanDebut.textContent = "("
+                let spanAdd = document.createElement("span")
+                spanAdd.classList.add("add")
+                spanAdd.textContent = "ajouter"
+                let span = document.createElement("span")
+                span.textContent = " - "
+                let spanRemove = document.createElement("span")
+                spanRemove.classList.add("remove")
+                spanRemove.textContent = "retirer"
+                let spanFinal = document.createElement("span")
+                spanFinal.textContent = ")"
+                catinCartQuant.appendChild(quantity)
+                catinCartQuant.appendChild(spanEmpty)
+                catinCartQuant.appendChild(spanQuant)
+                catinCartQuant.appendChild(spanDebut)
+                catinCartQuant.appendChild(spanAdd)
+                catinCartQuant.appendChild(span)
+                catinCartQuant.appendChild(spanRemove)
+                catinCartQuant.appendChild(spanFinal)
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartQuant)
 
                 // Vaccin & puces
                 let catinCartTreatment = document.createElement("p")
-                let vaccin
+                let vacStatut = document.createElement("span")
+                vacStatut.classList.add("underline")
+                vacStatut.textContent = "Vaccination"
+                let vacCheck = document.createElement("span")
+                    vacCheck.classList.add("fa-solid")
+                    vacCheck.classList.add("fa-vac")
                 let vaccinInfo = ""
-                let puces
-                let pucesInfo = ""
                 if (storage.vaccin) {
-                    vaccin = '<i class="fa-solid fa-check fa-vac"></i>'
-                    vaccinInfo = "vaccination"
+                    vacCheck.classList.add("fa-check")
                     price += 5 * storage.quantity
+                    vaccinInfo = "vaccination"
                 } else {
-                    vaccin = '<i class="fa-solid fa-xmark fa-vac"></i>'
+                    vacCheck.classList.add("fa-xmark")
                 }
+
+                let pucStatut = document.createElement("span")
+                pucStatut.classList.add("underline")
+                pucStatut.textContent = "Traitement anti-puces"
+                let pucCheck = document.createElement("span")
+                    pucCheck.classList.add("fa-solid")
+                    pucCheck.classList.add("fa-vac")
+                let pucesInfo = ""
                 if (storage.puces) {
-                    puces = '<i class="fa-solid fa-check fa-puc"></i>'
+                    pucCheck.classList.add("fa-check")
+                    price += 5 * storage.quantity
                     pucesInfo = "traitement anti-puces"
-                    price += 10 * storage.quantity
                 } else {
-                    puces = '<i class="fa-solid fa-xmark fa-puc"></i>'
-                }                
-                catinCartTreatment.innerHTML = `<u>Vaccination :</u> ${vaccin} <u>Traintement anti-puces :</u> ${puces}`
+                    pucCheck.classList.add("fa-xmark")
+                }
+
+                let spanEmpty2 = document.createElement("span")
+                spanEmpty2.textContent = " "
+                let spanEmpty3 = document.createElement("span")
+                spanEmpty3.textContent = " "
+
+                catinCartTreatment.appendChild(vacStatut)
+                catinCartTreatment.appendChild(spanEmpty2)
+                catinCartTreatment.appendChild(vacCheck)
+                catinCartTreatment.appendChild(pucStatut)
+                catinCartTreatment.appendChild(spanEmpty3)
+                catinCartTreatment.appendChild(pucCheck)
+
                 document.querySelectorAll(".main__cart__cat")[j].appendChild(catinCartTreatment)
 
                 j++
@@ -181,16 +236,16 @@ if (localStorage.length > 0) {
                 if (vaccinInfo === "" && pucesInfo === "") {
                     vaccinInfo = "aucune"
                 } else if (vaccinInfo !== "" && pucesInfo !== "") {
-                    vaccinInfo = "vaccination,"
+                    vaccinInfo = "vaccination et"
                 }
-                document.querySelector("#message").innerHTML += `Chat désiré : ${cats[storage.id - 1].name} - Quantité : ${storage.quantity} - Options : ${vaccinInfo} ${pucesInfo} \n`
+                document.querySelector("#message").textContent += `Chat désiré : ${cats[storage.id - 1].name} - Quantité : ${storage.quantity} - Options : ${vaccinInfo} ${pucesInfo} \n`
             }
         }
     }
     if (document.querySelector(".main__cart__content")) {
 
         // Edition du panier
-        let dismiss = document.querySelectorAll(".main__cart__cat__name i")
+        let dismiss = document.querySelectorAll(".main__cart__cat__name span")
         let add = document.querySelectorAll(".add")
         let remove = document.querySelectorAll(".remove")
         let vaccin = document.querySelectorAll(".fa-vac")
@@ -217,39 +272,39 @@ if (localStorage.length > 0) {
                 location.reload()
             })
             let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
-            vaccin[i].addEventListener("click", function() {
-                if (storage.vaccin) {
-                    vaccin[i].classList.remove("fa-check")
-                    vaccin[i].classList.add("fa-xmark")
-                    storage.vaccin = false
-                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-                } else {
-                    vaccin[i].classList.remove("fa-xmark")
-                    vaccin[i].classList.add("fa-check")
-                    storage.vaccin = true
-                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-                }
-                location.reload()
-            })
-            puces[i].addEventListener("click", function() {
-                if (storage.puces) {
-                    puces[i].classList.remove("fa-check")
-                    puces[i].classList.add("fa-xmark")
-                    storage.puces = false
-                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-                } else {
-                    puces[i].classList.remove("fa-xmark")
-                    puces[i].classList.add("fa-check")
-                    storage.puces = true
-                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-                }
-                location.reload()
-            })
+            // vaccin[i].addEventListener("click", function() {
+            //     if (storage.vaccin) {
+            //         vaccin[i].classList.remove("fa-check")
+            //         vaccin[i].classList.add("fa-xmark")
+            //         storage.vaccin = false
+            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+            //     } else {
+            //         vaccin[i].classList.remove("fa-xmark")
+            //         vaccin[i].classList.add("fa-check")
+            //         storage.vaccin = true
+            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+            //     }
+            //     location.reload()
+            // })
+            // puces[i].addEventListener("click", function() {
+            //     if (storage.puces) {
+            //         puces[i].classList.remove("fa-check")
+            //         puces[i].classList.add("fa-xmark")
+            //         storage.puces = false
+            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+            //     } else {
+            //         puces[i].classList.remove("fa-xmark")
+            //         puces[i].classList.add("fa-check")
+            //         storage.puces = true
+            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+            //     }
+            //     location.reload()
+            // })
         }
 
         // Prix total et message
-        document.querySelector(".main__cart__price").innerHTML = `<u>Prix total :</u> ${price}€`
-        document.querySelector("#message").innerHTML += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
+        document.querySelector(".main__cart__price").textContent = `<u>Prix total :</u> ${price}€`
+        document.querySelector("#message").textContent += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
         // Envoie du panier
         document.querySelector(".main__cart__form__submit").addEventListener("click", getMyCat)

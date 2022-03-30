@@ -338,15 +338,19 @@ body {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: center;
-                    i {
+                    span {
                         margin-left: 5px;
                     }
                 }
             }
 
+            .underline {
+                text-decoration: underline;
+            }
+
             &__name {
                 font-size: 2em;
-                i {
+                span {
                     color: #000;
                     font-size: 0.5em;
                     position: relative;
