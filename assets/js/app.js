@@ -293,15 +293,24 @@ if (localStorage.length > 0) {
             return valid
         }
 
-        //Envoi du panier
+        // Préparation du message
+        function sendMessage() {
+            let name = document.querySelector("#name").value
+            let email = document.querySelector("#email").value
+            let content = document.querySelector("#message").value
+            let message = [name, email, content]
+            order.push(message)
+        }
+
+        // Envoi du panier
         document.querySelector(".main__cart__form__submit").addEventListener("click", function(e) {
             let isValid = regex(e)
             if (isValid) {
+                sendMessage()
+                console.log("La commande est : " + JSON.stringify(order))
                 alert("Merci pour votre commande, nous allons revenir vers vous très prochainement !")
                 localStorage.clear()
             }
         })
-        
-        console.log("La commande est : " + JSON.stringify(order))
     }
 }
