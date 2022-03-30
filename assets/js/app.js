@@ -202,11 +202,11 @@ if (localStorage.length > 0) {
                 pucStatut.textContent = "Traitement anti-puces"
                 let pucCheck = document.createElement("span")
                     pucCheck.classList.add("fa-solid")
-                    pucCheck.classList.add("fa-vac")
+                    pucCheck.classList.add("fa-puc")
                 let pucesInfo = ""
                 if (storage.puces) {
                     pucCheck.classList.add("fa-check")
-                    price += 5 * storage.quantity
+                    price += 10 * storage.quantity
                     pucesInfo = "traitement anti-puces"
                 } else {
                     pucCheck.classList.add("fa-xmark")
@@ -272,38 +272,48 @@ if (localStorage.length > 0) {
                 location.reload()
             })
             let storage = JSON.parse(localStorage.getItem(dismiss[i].getAttribute("value")))
-            // vaccin[i].addEventListener("click", function() {
-            //     if (storage.vaccin) {
-            //         vaccin[i].classList.remove("fa-check")
-            //         vaccin[i].classList.add("fa-xmark")
-            //         storage.vaccin = false
-            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-            //     } else {
-            //         vaccin[i].classList.remove("fa-xmark")
-            //         vaccin[i].classList.add("fa-check")
-            //         storage.vaccin = true
-            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-            //     }
-            //     location.reload()
-            // })
-            // puces[i].addEventListener("click", function() {
-            //     if (storage.puces) {
-            //         puces[i].classList.remove("fa-check")
-            //         puces[i].classList.add("fa-xmark")
-            //         storage.puces = false
-            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-            //     } else {
-            //         puces[i].classList.remove("fa-xmark")
-            //         puces[i].classList.add("fa-check")
-            //         storage.puces = true
-            //         localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
-            //     }
-            //     location.reload()
-            // })
+            vaccin[i].addEventListener("click", function() {
+                if (storage.vaccin) {
+                    vaccin[i].classList.remove("fa-check")
+                    vaccin[i].classList.add("fa-xmark")
+                    storage.vaccin = false
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                } else {
+                    vaccin[i].classList.remove("fa-xmark")
+                    vaccin[i].classList.add("fa-check")
+                    storage.vaccin = true
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                }
+                location.reload()
+            })
+            puces[i].addEventListener("click", function() {
+                if (storage.puces) {
+                    puces[i].classList.remove("fa-check")
+                    puces[i].classList.add("fa-xmark")
+                    storage.puces = false
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                } else {
+                    puces[i].classList.remove("fa-xmark")
+                    puces[i].classList.add("fa-check")
+                    storage.puces = true
+                    localStorage.setItem(dismiss[i].getAttribute("value"), JSON.stringify(storage))
+                }
+                location.reload()
+            })
         }
 
         // Prix total et message
-        document.querySelector(".main__cart__price").textContent = `<u>Prix total :</u> ${price}€`
+        let spanPrice = document.createElement("span")
+        spanPrice.classList.add("underline")
+        spanPrice.textContent = "Prix total :"
+        let spanEmpty4 = document.createElement("span")
+        spanEmpty4.textContent = " "
+        let spanPriceValue = document.createElement("span")
+        spanPriceValue.textContent = price + "€"
+        document.querySelector(".main__cart__price").textContent = ""
+        document.querySelector(".main__cart__price").appendChild(spanPrice)
+        document.querySelector(".main__cart__price").appendChild(spanEmpty4)
+        document.querySelector(".main__cart__price").appendChild(spanPriceValue)
         document.querySelector("#message").textContent += `\nPrix total : ${price}€ \n \n==================== \n \nVotre message : `
 
         // Envoie du panier
