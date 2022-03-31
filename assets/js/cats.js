@@ -1,3 +1,14 @@
+/**
+ * Permet de générer de nouveaux chats
+ * @constructor
+ * @param {int} id - L'id du chat, génère l'id de la page du chat
+ * @param {string} name - Le nom du chat
+ * @param {string} race - La race du chat
+ * @param {string} color - La couleur du chat
+ * @param {string} age - L'âge du chat
+ * @param {int} price - Le prix du chat
+ * @param {boolean} statut - Définit si le chat est disponible
+ */
 class Cat {
     constructor(id, name, race, color, age, price, statut) {
         this.id = id
@@ -10,6 +21,9 @@ class Cat {
     }
 }
 
+/**
+ * Tableau regroupant l'ensemble des chats de l'API
+ */
 let cats = [
     new Cat(1, "Gribouille", "Main coon", "gris", "8 ans", "12", true),
     new Cat(2, "Simba", "Sphynx", "roux", "1 an et demi", "25", true),

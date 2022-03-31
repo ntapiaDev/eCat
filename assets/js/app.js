@@ -46,6 +46,9 @@ if (document.querySelector(".main__cat-info")) {
     document.querySelector("#vaccin").addEventListener("change", setPrice)
     document.querySelector("#puces").addEventListener("change", setPrice)
     document.querySelector(".main__cat-info__number").addEventListener("change", setPrice)
+    /**
+     * Fonction pour définir le prix des chats en fonction du vaccin et du traitement anti-puces
+     */
     function setPrice() {
         if (document.querySelector("#vaccin").checked && document.querySelector("#puces").checked) {
             update(15)
@@ -56,13 +59,29 @@ if (document.querySelector(".main__cat-info")) {
         } else {
             update(0)
         }
+        /**
+         * Fonction pour mettre à jour le prix en fonction du prix en entrée
+         * @param {int} value - 0 (aucune sélection), 5 (vaccin), 10 (traitement anti-puces), 15 (vaccin + traitement)
+         */
         function update(value) {
             document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€/jour seulement"
         }
     }
 
+    /**
+     * Fonction pour ajouter un nouveau chat dans le panier
+     */
     function addCat() {
         if (document.querySelector(".main__cat-info__number").value > 0) {
+            /**
+             * Crée un nouveau chat à insérer au panier
+             * @constructor
+             * @param {int} id - id du chat
+             * @param {boolean} statut - vérifie si le chat est disponible ou non
+             * @param {boolean} vaccin - vérifie si la vaccination est sélectionnée
+             * @param {boolean} puces - vérifie si le traitement anti-puces est sélectionné
+             * @param {int} quantity - quantité de jours demandés
+             */
             class choosenCat {
                 constructor(id, statut, vaccin, puces, quantity) {
                     this.id = id
@@ -254,6 +273,11 @@ if (localStorage.length > 0) {
 
         // Contrôle du formulaire
         let textareaLength = document.querySelector("#message").value.length
+        /**
+         * Fonction pour la vérification des champs utilisateurs envoyés via regex
+         * @param {string} e - event pour faire un preventDefault en cas d'échec 
+         * @returns Un booléen définissant le succès ou l'échec de la vérification
+         */
         function regex(e) {
             let valid = true
             let regexName = /[^a-zA-ZÀ-ÿ]/
@@ -294,6 +318,9 @@ if (localStorage.length > 0) {
         }
 
         // Préparation du message
+        /**
+         * Fonction qui récupère le contenu des champs du formulaire, les stock et renvoie les données dans la commande (order)
+         */
         function sendMessage() {
             let name = document.querySelector("#name").value
             let email = document.querySelector("#email").value
