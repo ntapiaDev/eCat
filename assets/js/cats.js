@@ -8,6 +8,7 @@
  * @param {string} age - L'âge du chat
  * @param {int} price - Le prix du chat
  * @param {boolean} statut - Définit si le chat est disponible
+ * @returns {Object} Un chat
  */
 class Cat {
     constructor(id, name, race, color, age, price, statut) {
