@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://kit.fontawesome.com/015d178d74.js" crossorigin="anonymous"></script>
+    <title>eCat</title>
+</head>
+<body>
+    <header>
+        <div class="header__info">
+            <ul>
+                <li><i class="fa-solid fa-phone"></i> 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="header__logo">
+            <div class="header__logo__container">
+                 <div class="logo">
+                    <img src="./assets/img/logo.png" alt="">
+                </div>
+                <p class="header__logo__name">eCat - La location de chats pour tous</p>
+            </div>
+           
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="cart.html">Mon panier</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="main__banner">
+            <img src="./assets/img/background.png" alt="">
+        </div>
+        <section class="main__cats">
+            <h1>Nos chats à adopter :</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae odit tempora cum! Quis delectus, nesciunt saepe dolorum a quasi adipisci doloribus aut incidunt debitis! At alias molestias distinctio consequuntur voluptates mollitia modi veniam in itaque ipsa eaque, exercitationem impedit perferendis explicabo quo eveniet esse fuga beatae illo repellat, aspernatur suscipit.</p>
+            
+            <div class="main__cats__container">
+                <!-- Template de chaque chat -->
+                <template id="main__cat">
+                    <div class="main__cat">
+                        <a href="">
+                            <img src="" alt="" class="main__cat__img">
+                            <h2 class="main__cat__name"></h2>
+                            <p><strong>Race :</strong> <span class="main__cat__race"></span></p>
+                            <p><strong>Couleur :</strong> <span class="main__cat__color"></span></p>
+                            <p><strong>Age :</strong> <span class="main__cat__age"></span></p>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__info">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="">
+            </div>
+            <ul>
+                <li>Pour nous joindre : 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="footer__credits">
+            <p>All rights reserved © 2022 - Toute reproduction interdite.</p>
+        </div>
+    </footer>
+    <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

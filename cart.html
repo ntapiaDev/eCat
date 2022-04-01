@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://kit.fontawesome.com/015d178d74.js" crossorigin="anonymous"></script>
+    <title>eCat</title>
+</head>
+<body>
+    <header>
+        <div class="header__info">
+            <ul>
+                <li><i class="fa-solid fa-phone"></i> 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="header__logo">
+            <div class="header__logo__container">
+                <div class="logo">
+                   <img src="./assets/img/logo.png" alt="">
+               </div>
+               <p class="header__logo__name">eCat - La location de chats pour tous</p>
+           </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="cart.html">Mon panier</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="main__cart">
+            <h1 class="main__cart__title">Vos petits chouchous :</h1>
+            <p class="main__cart__price">Votre panier est vide.</p>
+            <!-- Template affichage du prix -->
+            <template id="price">
+                <span class="underline">Prix total :</span><span class="price"></span>
+            </template>
+            <!-- Template affichage de la quantité -->
+            <template id="quantity">
+                <p><span class="underline">Quantité :</span> <span class="main__cart__cat__quant"></span> (<span class="add">ajouter</span> - <span class="remove">retirer</span>)</p>
+            </template>
+            <!-- Template vaccin & puces -->
+            <template id="vac-puc">
+                <p><span class="underline">Vaccination :</span> <span class="vaccination-statut"></span> <span class="underline">Traitement anti-puces :</span> <span class="puces-statut"></span></p>
+            </template>
+            <div class="main__cart__content"></div>
+
+            <!-- Formulaire de contact -->
+            <form action="#" class="main__cart__form">
+                <label for="name"><span>Votre nom</span><span class="label-name"></span></label>
+                <input type="text" name="name" id="name" required>
+                <label for="email"><span>Votre adresse email</span><span class="label-email"></span></label>
+                <input type="email" name="email" id="email" required>
+                <label for="message"><span>Votre message</span><span class="label-message"></span></label>
+                <textarea name="message" id="message"></textarea>
+                <input type="submit" value="Commander mon chat !" class="main__cart__form__submit">
+            </form>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer__info">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="">
+            </div>
+            <ul>
+                <li>Pour nous joindre : 02.35.06.66.00</li>
+                <li><i class="fa-solid fa-envelope"></i> mon.adresse@google.fr</li>
+                <li><i class="fa-solid fa-location-dot"></i> 12 rue des Sapins, 76100 ROUEN</li>
+            </ul>
+        </div>
+        <div class="footer__credits">
+            <p>All rights reserved © 2022 - Toute reproduction interdite.</p>
+        </div>
+    </footer>
+    <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>
