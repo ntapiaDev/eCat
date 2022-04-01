@@ -1,6 +1,6 @@
 <?php
-require_once('langage.php');
-require_once('header.php');
+require_once('./assets/php/langage.php');
+require_once('./assets/php/header.php');
 ?>
         <section class="main__cat-info">
             <h1 class="main__cat-info__title"></h1>
@@ -23,4 +23,4 @@ require_once('header.php');
             </div>
         </section>
 <?php
-require_once('footer.php');
+require_once('./assets/php/footer.php');

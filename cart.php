@@ -1,6 +1,6 @@
 <?php
-require_once('langage.php');
-require_once('header.php');
+require_once('./assets/php/langage.php');
+require_once('./assets/php/header.php');
 ?>
         <section class="main__cart">
             <h1 class="main__cart__title"><?=$sweeties?></h1>
@@ -31,4 +31,4 @@ require_once('header.php');
             </form>
         </section>
 <?php
-require_once('footer.php');
+require_once('./assets/php/footer.php');

@@ -1,6 +1,6 @@
 <?php
-require_once('langage.php');
-require_once('header.php');
+require_once('./assets/php/langage.php');
+require_once('./assets/php/header.php');
 ?>
         <div class="main__banner">
             <img src="./assets/img/background.png" alt="">
@@ -25,4 +25,4 @@ require_once('header.php');
             </div>
         </section>
 <?php
-require_once('footer.php');
+require_once('./assets/php/footer.php');
