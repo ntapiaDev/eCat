@@ -17,20 +17,27 @@ body {
 .header {
     &__info {
         background-color: $main-blue;
-        ul {
+        &__container {
             max-width: $screen-width;
             margin: 0 auto;
             display: flex;
-            
-            @media screen and (max-width: 768px) {
-                display: block;
-                text-align: center;
+            justify-content: space-between;
+            align-items: center;
+            ul {
+                display: flex;
+                @media screen and (max-width: 768px) {
+                    display: block;
+                    text-align: center;
+                }
             }  
-
             li {
                 padding: 15px;
                 color: #FFF;
                 list-style: none;
+            }
+            img {
+                width: 40px;
+                margin: 0 5px;
             }
         }
     }

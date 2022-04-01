@@ -1,5 +1,13 @@
 import cats from "./cats.js"
 
+// Gestion de la langue
+let params = new URLSearchParams(window.location.search)
+let lang = ""
+if (params.get('lang') !== null) {
+    lang = "&lang=" + params.get('lang')
+    console.log(lang);
+}
+
 // Affichage de la page d'accueil dynamique
 if (document.querySelector(".main__cats")) {
     // Utilisation du template
@@ -11,7 +19,7 @@ if (document.querySelector(".main__cats")) {
         }
     }
     for (let i = 0; i < cats.length; i++) {
-        document.querySelectorAll(".main__cat a")[i].href = `./cats.html?id=${cats[i].id}`
+        document.querySelectorAll(".main__cat a")[i].href = `./cats.php?id=${cats[i].id}${lang}`
         document.querySelectorAll(".main__cat img")[i].src = `./assets/img/${cats[i].id}_small.png`
         document.querySelectorAll(".main__cat__name")[i].textContent = cats[i].name
         document.querySelectorAll(".main__cat__race")[i].textContent = cats[i].race
@@ -22,14 +30,15 @@ if (document.querySelector(".main__cats")) {
 
 // Page chats-info dynamique
 if (document.querySelector(".main__cat-info")) {
-    let id = window.location.search.slice(4)
+    // let id = window.location.search.slice(4)
+    let id = params.get('id')
     document.querySelector(".main__cat-info__title").textContent = cats[id - 1].name
     document.querySelector(".main__cat-info__img").src = `./assets/img/${id}.png`
     document.querySelector(".color").textContent = cats[id - 1].color
     document.querySelector(".age").textContent = cats[id - 1].age
     document.querySelector(".race").textContent = cats[id - 1].race
     let price = cats[id - 1].price
-    document.querySelector(".price").textContent = price + "€/jour seulement"
+    document.querySelector(".price").textContent = price + "€ seulement"
     document.querySelector(".main__cat-info__btn").value = `Ajouter ${cats[id - 1].name} au panier`
     let readyInfo = document.querySelector(".main__cat-info__ready")
     if (cats[id - 1].statut) {
@@ -64,7 +73,7 @@ if (document.querySelector(".main__cat-info")) {
          * @param {int} value - 0 (aucune sélection), 5 (vaccin), 10 (traitement anti-puces), 15 (vaccin + traitement)
          */
         function update(value) {
-            document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€/jour seulement"
+            document.querySelector(".price").textContent = parseInt(price * document.querySelector(".main__cat-info__number").value) + value * document.querySelector(".main__cat-info__number").value + "€ seulement"
         }
     }
 
@@ -110,7 +119,7 @@ if (document.querySelector(".main__cat-info")) {
         if (e.key === "Enter") {
             e.preventDefault()
             addCat()
-            location.href = "/cart.html"
+            location.href = "/cart.php"
         }
     })
 }
